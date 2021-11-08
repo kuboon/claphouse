@@ -1,5 +1,7 @@
 /** @jsx h */
-import { h, useCallback, useEffect, useRef, useState } from "../deps.ts";
+import { PageConfig, h, useCallback, useEffect, useState, useRef } from "../deps.ts";
+
+export const config: PageConfig = { runtimeJS: true };
 
 const list = {
   clap: {
@@ -16,7 +18,7 @@ const list = {
 
 let context: AudioContext;
 const buffers = {} as Record<string, AudioBuffer>;
-function loadSounds() {
+async function loadSounds() {
   const AudioContext = window.AudioContext || window.webkitAudioContext;
   context = new AudioContext();
   const files = Object.values(list).flatMap(({ files }) => files);
@@ -39,7 +41,7 @@ function SoundToggle() {
   useEffect(() => {
     loadSounds();
   }, []);
-  const onClick = useCallback(async (e) => {
+  const onClick = useCallback(async () => {
     if (!context) await loadSounds();
     setIsOn(!isOn);
     if (isOn) {
@@ -57,13 +59,12 @@ function SoundToggle() {
   );
 }
 
-function print(msg) {
+function print(msg: string) {
+  console.log(msg)
   //logElm.insertAdjacentHTML('afterbegin', `<p>${msg}</p>`)
 }
 function sample<T>(arr: T[]): T {
-  if (arr && arr.length) {
-    return arr[Math.floor(Math.random() * arr.length)]!;
-  }
+  return arr[Math.floor(Math.random() * arr.length)];
 }
 function play(tag: keyof typeof list) {
   print("受信: " + tag);
@@ -78,9 +79,6 @@ function play(tag: keyof typeof list) {
     print(e);
   }
 }
-function callPlay(tag: string, uuid: string) {
-  fetch(`/api/play?tag=${tag}&uuid=${uuid}`);
-}
 export default function Room() {
   if (!window.location) return <p>loading</p>;
   const params = new URLSearchParams(window.location.hash.substring(1));
@@ -88,6 +86,14 @@ export default function Room() {
   if (!uuid) {
     return <p>loading</p>;
   }
+  const wsRef = useRef(new WebSocket(`ws://${location.host}/ws/${uuid}`))
+  const ws = wsRef.current
+  useEffect(()=>{
+    ws.addEventListener("message", ({data}) => {
+      play(data)
+    });  
+  }, [])
+
   return (
     <div className="page">
       <head>
@@ -101,7 +107,7 @@ export default function Room() {
       {Object.entries(list).map(([tag, sound]) => (
         <button
           key={sound.key}
-          onClick={() => callPlay(tag, uuid)}
+          onClick={() => ws.send(tag)}
         >
           {sound.button}
         </button>
