@@ -1,4 +1,4 @@
-import { Aleph, Server } from 'aleph/server/mod.ts'
+import { Aleph, Server } from 'https://deno.land/x/aleph/server/mod.ts'
 
 const aleph = new Aleph()
 const server = new Server(aleph)
