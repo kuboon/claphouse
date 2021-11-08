@@ -4,6 +4,7 @@ import { Fallback } from 'aleph/react'
 const list = {
   clap: {
     button: '👏',
+    key: 'c',
     files: [
       'clap0.m4a',
       'clap1.m4a',
