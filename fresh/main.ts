@@ -16,7 +16,7 @@ async function start(routes: Routes) {
   console.log("Server listening on http://localhost:8000");
   await listenAndServe(":8000", async (req) => {
     console.log(req.method, req.url)
-    if (req.method === "GET" && req.url.startsWith("/ws/")) {
+    if (req.method === "GET" && req.url.includes("/ws/")) {
       const { socket, response } = Deno.upgradeWebSocket(req);
       if (socket) {
         const uuid = req.url.split('/').at(-1)!
