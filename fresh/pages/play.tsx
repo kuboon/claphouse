@@ -86,7 +86,7 @@ export default function Room() {
   if (!uuid) {
     return <p>loading</p>;
   }
-  const wsRef = useRef(new WebSocket(`ws://${location.host}/ws/${uuid}`))
+  const wsRef = useRef(new WebSocket(`wss://${location.host}/ws/${uuid}`))
   const ws = wsRef.current
   useEffect(()=>{
     ws.addEventListener("message", ({data}) => {

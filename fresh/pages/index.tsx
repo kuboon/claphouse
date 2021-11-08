@@ -1,5 +1,5 @@
 /** @jsx h */
-import { h, IS_BROWSER, PageConfig } from "../deps.ts";
+import { h, Head, IS_BROWSER, PageConfig } from "../deps.ts";
 
 
 export const config: PageConfig = { runtimeJS: true };
@@ -10,12 +10,13 @@ export default function Home() {
 
   return (
     <div>
-      <head>
+      <Head>
         <title>👏Claphouse</title>
-        <link rel="stylesheet" href="../style/index.css" />
-      </head>
+        <link rel="stylesheet" href="/style/index.css" />
+      </Head>
       <p className="logo">👏</p>
       <h1>Claphouse</h1>
+      <p>{uuid}{IS_BROWSER}</p>
       <a href={'/play#' + params.toString()} >Create Room</a>
     </div>
   );
