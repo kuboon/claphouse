@@ -15,17 +15,21 @@ async function start(routes: Routes) {
   const ctx = await ServerContext.fromRoutes(routes);
   console.log("Server listening on http://localhost:8000");
   await listenAndServe(":8000", async (req) => {
-    console.log(req.method, req.url)
     if (req.method === "GET" && req.url.includes("/ws/")) {
       const { socket, response } = Deno.upgradeWebSocket(req);
       if (socket) {
         const uuid = req.url.split('/').at(-1)!
         const channel = new BroadcastChannel(uuid);
         channel.onmessage = (ev) => {
+          console.log('bc to ws', ev.data)
           socket.send(ev.data)
         }
         socket.onmessage = (ev) => {
+          console.log('ws to bc', ev.data)
           channel.postMessage(ev.data)
+        }
+        socket.onclose = ()=>{
+          channel.close()
         }
         return response
       }
