@@ -98,7 +98,7 @@ export default function Room() {
     <div className="page">
       <head>
         <title>👏Claphouse</title>
-        <link rel="stylesheet" href="/style/index.css" />
+        <link rel="stylesheet" href="/style.css" />
       </head>
       <p className="logo">👏</p>
       <h1>Claphouse</h1>

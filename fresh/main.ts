@@ -15,6 +15,7 @@ async function start(routes: Routes) {
   const ctx = await ServerContext.fromRoutes(routes);
   console.log("Server listening on http://localhost:8000");
   await listenAndServe(":8000", async (req) => {
+    console.log(req.method, req.url)
     if (req.method === "GET" && req.url.startsWith("/ws/")) {
       const { socket, response } = Deno.upgradeWebSocket(req);
       if (socket) {
