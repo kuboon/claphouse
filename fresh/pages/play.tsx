@@ -1,60 +1,60 @@
 /** @jsx h */
-import { h, useRef, useState, useEffect, useCallback } from '../deps.ts'
+import { h, useCallback, useEffect, useRef, useState } from "../deps.ts";
 
 const list = {
   clap: {
-    button: '👏',
-    key: 'c',
+    button: "👏",
+    key: "c",
     files: [
-      'clap0.m4a',
-      'clap1.m4a',
-      'clap2.m4a',
-      'clap3.m4a',
-    ]
-  }
-}
+      "clap0.m4a",
+      "clap1.m4a",
+      "clap2.m4a",
+      "clap3.m4a",
+    ],
+  },
+};
 
-let context: AudioContext
-const buffers = {} as Record<string, AudioBuffer>
+let context: AudioContext;
+const buffers = {} as Record<string, AudioBuffer>;
 function loadSounds() {
-  const AudioContext = window.AudioContext || window.webkitAudioContext
-  context = new AudioContext()
-  const files = Object.values(list).flatMap(({ files }) => files)
+  const AudioContext = window.AudioContext || window.webkitAudioContext;
+  context = new AudioContext();
+  const files = Object.values(list).flatMap(({ files }) => files);
   const promises = files
-    .map(n =>
+    .map((n) =>
       fetch(`/sounds/${n}`)
-        .then(r => r.arrayBuffer())
-        .then(x => context.decodeAudioData(x))
-        .then(buf => (buffers[n] = buf))
-        .catch(e => {
-          print(e)
-          print(JSON.stringify(e))
+        .then((r) => r.arrayBuffer())
+        .then((x) => context.decodeAudioData(x))
+        .then((buf) => (buffers[n] = buf))
+        .catch((e) => {
+          print(e);
+          print(JSON.stringify(e));
         })
-    )
-  return Promise.all(promises).then(() => print('音源ロード完了'))
+    );
+  return Promise.all(promises).then(() => print("音源ロード完了"));
 }
 
 function SoundToggle() {
-  const [isOn, setIsOn] = useState(false)
+  const [isOn, setIsOn] = useState(false);
   useEffect(() => {
-    loadSounds()
-  }, [])
+    loadSounds();
+  }, []);
   const onClick = useCallback(async (e) => {
     if (!context) await loadSounds();
-    setIsOn(!isOn)
+    setIsOn(!isOn);
     if (isOn) {
       context.resume();
     } else {
       context.suspend();
     }
-  }, [isOn])
+  }, [isOn]);
   return (
     <div>
       <button onClick={onClick}>
-        {isOn ? '🔇 ➡️🔈' : '🔇⬅️ 🔈'}
+        {isOn ? "🔇 ➡️🔈" : "🔇⬅️ 🔈"}
       </button>
     </div>
-  )
+  );
 }
 
 function print(msg) {
@@ -62,33 +62,32 @@ function print(msg) {
 }
 function sample<T>(arr: T[]): T {
   if (arr && arr.length) {
-    return arr[Math.floor(Math.random() * arr.length)]!
+    return arr[Math.floor(Math.random() * arr.length)]!;
   }
 }
 function play(tag: keyof typeof list) {
-  print('受信: ' + tag)
-  const file = sample(list[tag].files)
-  print('再生: ' + file)
+  print("受信: " + tag);
+  const file = sample(list[tag].files);
+  print("再生: " + file);
   try {
-    const source = context.createBufferSource()
-    source.buffer = buffers[file]
-    source.connect(context.destination)
-    source.start()
+    const source = context.createBufferSource();
+    source.buffer = buffers[file];
+    source.connect(context.destination);
+    source.start();
   } catch (e) {
-    print(e)
+    print(e);
   }
 }
-function callPlay(tag: string, uuid: string){
-  fetch(`/api/play?tag=${tag}&uuid=${uuid}`)
+function callPlay(tag: string, uuid: string) {
+  fetch(`/api/play?tag=${tag}&uuid=${uuid}`);
 }
 export default function Room() {
-  const params = new URLSearchParams(window.location.hash.substring(1))
-  const uuid = params.get('uuid')
-  if(!uuid) {
-    return <p>loading</p>
+  if (!window.location) return <p>loading</p>;
+  const params = new URLSearchParams(window.location.hash.substring(1));
+  const uuid = params.get("uuid");
+  if (!uuid) {
+    return <p>loading</p>;
   }
-  const channelRef = useRef(new BroadcastChannel(uuid))
-  const channel = channelRef.current
   return (
     <div className="page">
       <head>
@@ -109,5 +108,5 @@ export default function Room() {
       ))}
       <p className="copyinfo">Built by kuboon</p>
     </div>
-  )
+  );
 }
