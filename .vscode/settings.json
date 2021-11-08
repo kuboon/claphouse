@@ -4,5 +4,8 @@
   "deno.config": "./deno.json",
   "deno.importMap": "./import_map.json",
   "deno.lint": true,
-  "deno.path": "/home/vscode/.asdf/shims/deno"
+  "deno.path": "/home/vscode/.asdf/shims/deno",
+  "deno.suggest.imports.hosts": {
+    "https://deno.land": true
+  }
 }

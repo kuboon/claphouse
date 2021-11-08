@@ -1,33 +1,24 @@
 /** @jsx h */
-import { h, IS_BROWSER, PageConfig, useState } from "../deps.ts";
+import { h, IS_BROWSER, PageConfig } from "../deps.ts";
+
 
 export default function Home() {
+  const uuid = crypto.randomUUID();
+  const params = new URLSearchParams();
+  params.append('uuid', uuid);
+
   return (
     <div>
-      <p>
-        Welcome to `fresh`. Try update this message in the ./pages/index.tsx
-        file, and refresh.
-      </p>
-      <Counter />
+      <head>
+        <title>👏Claphouse</title>
+        <link rel="stylesheet" href="../style/index.css" />
+      </head>
+      <p className="logo">👏</p>
+      <h1>Claphouse</h1>
+      <a href={'/play#' + params.toString()} >Create Room</a>
       <p>{IS_BROWSER ? "Viewing browser render." : "Viewing JIT render."}</p>
     </div>
   );
 }
 
-function Counter() {
-  const [count, setCount] = useState(0);
-  return (
-    <div>
-      <p>{count}</p>
-      <button onClick={() => setCount(count - 1)} disabled={!IS_BROWSER}>
-        -1
-      </button>
-      <button onClick={() => setCount(count + 1)} disabled={!IS_BROWSER}>
-        +1
-      </button>
-    </div>
-  );
-}
-
-export const config: PageConfig = { runtimeJS: true };
-
+//export const config: PageConfig = { runtimeJS: true };
