@@ -4,15 +4,11 @@
 
 import * as $0 from "./pages/play.tsx";
 import * as $1 from "./pages/index.tsx";
-import * as $2 from "./pages/api/play.ts";
-import * as $3 from "./pages/[name].tsx";
 
 const routes = {
   pages: {
     "./pages/play.tsx": $0,
     "./pages/index.tsx": $1,
-    "./pages/api/play.ts": $2,
-    "./pages/[name].tsx": $3,
   },
   baseUrl: import.meta.url,
 };
