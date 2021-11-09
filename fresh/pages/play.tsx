@@ -86,13 +86,19 @@ export default function Room() {
   if (!uuid) {
     return <p>loading</p>;
   }
-  const wsRef = useRef(new WebSocket(`wss://${location.host}/ws/${uuid}`))
+  const wsUrl = `wss://${location.host}/ws/${uuid}`
+  function wsConnect(){
+    const ws = new WebSocket(wsUrl);
+    ws.onmessage = ({data}) => play(data);
+    ws.onclose = () => {
+      print("接続が切れました。");
+      setTimeout(wsConnect, 1000);
+    }
+    wsRef.current = ws;
+    return ws
+  }
+  const wsRef = useRef(wsConnect())
   const ws = wsRef.current
-  useEffect(()=>{
-    ws.addEventListener("message", ({data}) => {
-      play(data)
-    });  
-  }, [])
 
   return (
     <div className="page">
