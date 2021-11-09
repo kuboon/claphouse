@@ -1,13 +1,15 @@
 /** @jsx h */
-import { h, Head, IS_BROWSER, PageConfig } from "../deps.ts";
-
+import { h, Head, PageConfig, Suspense } from "../deps.ts";
 
 export const config: PageConfig = { runtimeJS: true };
-export default function Home() {
-  const uuid = IS_BROWSER ? crypto.randomUUID() : '---';
+function CreateRoom() {
+  const uuid = crypto.randomUUID();
   const params = new URLSearchParams();
-  params.append('uuid', uuid);
+  params.append("uuid", uuid);
 
+  return <a href={"/play#" + params.toString()}>Create Room</a>;
+}
+export default function Home() {
   return (
     <div>
       <Head>
@@ -16,8 +18,9 @@ export default function Home() {
       </Head>
       <p className="logo">👏</p>
       <h1>Claphouse</h1>
-      <p>{uuid}{IS_BROWSER}</p>
-      <a href={'/play#' + params.toString()} >Create Room</a>
+      <Suspense fallback={<p>Loading...</p>}>
+        <CreateRoom />
+      </Suspense>
     </div>
   );
 }
