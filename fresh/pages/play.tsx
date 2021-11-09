@@ -87,7 +87,7 @@ export default function Room() {
     return <p>loading</p>;
   }
   const wsUrl = `wss://${location.host}/ws/${uuid}`
-  function wsConnect(){
+  const wsConnect = useCallback(()=>{
     const ws = new WebSocket(wsUrl);
     ws.onmessage = ({data}) => play(data);
     ws.onclose = () => {
@@ -95,11 +95,11 @@ export default function Room() {
       setTimeout(wsConnect, 1000);
     }
     wsRef.current = ws;
-    return ws
-  }
-  const wsRef = useRef(wsConnect())
-  const ws = wsRef.current
+  }, [uuid])
+  const wsRef = useRef<WebSocket>()
+  useEffect(wsConnect, [])
 
+  const ws = wsRef.current!
   return (
     <div className="page">
       <head>
