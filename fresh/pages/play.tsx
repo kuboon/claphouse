@@ -99,7 +99,6 @@ export default function Room() {
   const wsRef = useRef<WebSocket>()
   useEffect(wsConnect, [])
 
-  const ws = wsRef.current!
   return (
     <div className="page">
       <head>
@@ -113,7 +112,7 @@ export default function Room() {
       {Object.entries(list).map(([tag, sound]) => (
         <button
           key={sound.key}
-          onClick={() => ws.send(tag)}
+          onClick={() => wsRef.current!.send(tag)}
         >
           {sound.button}
         </button>
