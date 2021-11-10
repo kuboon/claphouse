@@ -9,6 +9,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 RUN chsh -s /usr/bin/fish vscode
 USER vscode
 SHELL ["/usr/bin/fish", "-l", "-c"]
+RUN git config --global pull.ff only
 RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.1 \
  && mkdir -p ~/.config/fish/completions; and ln -s ~/.asdf/completions/asdf.fish ~/.config/fish/completions \
  && echo "source ~/.asdf/asdf.fish" >> $HOME/.config/fish/config.fish
