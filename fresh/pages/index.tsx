@@ -1,29 +1,36 @@
 /** @jsx h */
-import {
-  h,
-  Head,
-  PageConfig,
-  Suspense,
-  useCallback,
-  useState,
-} from "../deps.ts";
+/** @jsxFrag Fragment */
+import { Fragment, h, Head, PageConfig, useState } from "../deps.ts";
 
 export const config: PageConfig = { runtimeJS: true };
-function CreateRoom({ name }: { name: string }) {
+const useInput = (initialValue: string) => {
+  const [value, set] = useState(initialValue);
+  return {
+    value,
+    onChange: (e: Event) => set((e.target! as HTMLInputElement).value),
+  };
+};
+function CreateRoom() {
+  const name = useInput("test");
   const uuid = crypto.randomUUID();
   const params = new URLSearchParams();
-  params.append("name", name);
+  params.append("name", name.value);
   params.append("uuid", uuid);
 
-  return <a href={"/play#" + params.toString()}>Create Room</a>;
+  return (
+    <>
+      <label>
+        Room Name{" "}
+        <input
+          type="text"
+          {...name}
+        />
+      </label>
+      <a href={"/play#" + params.toString()}>Create Room</a>;
+    </>
+  );
 }
 export default function Home() {
-  const useInput = (initialValue: string) => {
-    const [value, set] = useState(initialValue)
-    return { value, onChange: (e: Event) => set((e.target! as HTMLInputElement).value) }
-  };
-
-  const name = useInput("test");
   return (
     <div>
       <Head>
@@ -32,15 +39,8 @@ export default function Home() {
       </Head>
       <h1>👏Claphouse</h1>
       <p>
-        <label>
-          Room Name<input
-            type="text"
-            {...name}
-          />
-        </label>
       </p>
-      {name.value}
-        <CreateRoom name={name.value} />
+      <CreateRoom name={name.value} />
     </div>
   );
 }
