@@ -3,6 +3,18 @@
 import { Fragment, h, Head, PageConfig, useState } from "../deps.ts";
 
 export const config: PageConfig = { runtimeJS: true };
+export default function Home() {
+  return (
+    <div>
+      <Head>
+        <title>👏Claphouse</title>
+        <link rel="stylesheet" href="/style/index.css" />
+      </Head>
+      <h1>👏Claphouse</h1>
+      <CreateRoom />
+    </div>
+  );
+}
 const useInput = (initialValue: string) => {
   const [value, set] = useState(initialValue);
   return {
@@ -26,21 +38,7 @@ function CreateRoom() {
           {...name}
         />
       </label>
-      <a href={"/play#" + params.toString()}>Create Room</a>;
+      <a href={"/play#" + params.toString()}>Create Room</a>
     </>
-  );
-}
-export default function Home() {
-  return (
-    <div>
-      <Head>
-        <title>👏Claphouse</title>
-        <link rel="stylesheet" href="/style/index.css" />
-      </Head>
-      <h1>👏Claphouse</h1>
-      <p>
-      </p>
-      <CreateRoom name={name.value} />
-    </div>
   );
 }

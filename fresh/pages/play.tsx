@@ -8,7 +8,6 @@ import {
   PageConfig,
   useCallback,
   useEffect,
-  useRef,
   useState,
 } from "../deps.ts";
 
@@ -17,7 +16,6 @@ export const config: PageConfig = { runtimeJS: true };
 const list = {
   clap: {
     button: "👏",
-    key: "c",
     files: [
       "clap0.m4a",
       "clap1.m4a",
@@ -29,7 +27,7 @@ const list = {
 
 let context: AudioContext;
 const buffers = {} as Record<string, AudioBuffer>;
-async function loadSounds() {
+function loadSounds() {
   context = new AudioContext();
   const files = Object.values(list).flatMap(({ files }) => files);
   const promises = files
@@ -115,6 +113,22 @@ export default function PlayContainer() {
     </>
   );
 }
+let ws: WebSocket;
+const wsHooks: Partial<WebSocket> = {
+  onmessage: ({ data }) => play(data),
+  onopen: () => print("接続しました"),
+  onclose: () => {
+    print("接続が切れました");
+    setTimeout(()=>wsConnect(ws.url), 1000);
+  },
+};
+function wsConnect(url: string) {
+  if (ws) {
+    ws.close();
+  }
+  ws = new WebSocket(url);
+  Object.assign(ws, wsHooks);
+}
 export function Play() {
   if (!IS_BROWSER) {
     return (
@@ -130,17 +144,7 @@ export function Play() {
     return <p>Invalid URL</p>;
   }
   const wsUrl = `wss://${location.host}/ws/${uuid}`;
-  const wsConnect = useCallback(() => {
-    const ws = new WebSocket(wsUrl);
-    ws.onmessage = ({ data }) => play(data);
-    ws.onclose = (err) => {
-      print("接続が切れました。" + JSON.stringify(err));
-      //setTimeout(wsConnect, 1000);
-    };
-    wsRef.current = ws;
-  }, [uuid]);
-  const wsRef = useRef<WebSocket>();
-  useEffect(wsConnect, []);
+  useEffect(()=>wsConnect(wsUrl), []);
 
   return (
     <main id="play">
@@ -151,8 +155,7 @@ export function Play() {
       <SoundToggle />
       {Object.entries(list).map(([tag, sound]) => (
         <button
-          key={sound.key}
-          onClick={() => wsRef.current!.send(tag)}
+          onClick={() => ws && ws.send(tag)}
         >
           {sound.button}
         </button>

@@ -1,3 +1,4 @@
+#!/usr/bin/env -S deno run --no-check --allow-net --allow-env --unstable --allow-read --allow-write --allow-run
 /// <reference no-default-lib="true" />
 /// <reference lib="dom" />
 /// <reference lib="dom.asynciterable" />
