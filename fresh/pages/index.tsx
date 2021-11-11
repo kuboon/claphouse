@@ -1,18 +1,14 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 import { Fragment, h, Head, PageConfig, useState } from "../deps.ts";
+import Template from "../components/Template.tsx";
 
 export const config: PageConfig = { runtimeJS: true };
 export default function Home() {
   return (
-    <div>
-      <Head>
-        <title>👏Claphouse</title>
-        <link rel="stylesheet" href="/style/index.css" />
-      </Head>
-      <h1>👏Claphouse</h1>
+    <Template>
       <CreateRoom />
-    </div>
+    </Template>
   );
 }
 const useInput = (initialValue: string) => {
@@ -23,7 +19,7 @@ const useInput = (initialValue: string) => {
   };
 };
 function CreateRoom() {
-  const name = useInput("test");
+  const name = useInput("");
   const uuid = crypto.randomUUID();
   const params = new URLSearchParams();
   params.append("name", name.value);
@@ -32,7 +28,7 @@ function CreateRoom() {
   return (
     <>
       <label>
-        Room Name{" "}
+        Room Name:
         <input
           type="text"
           {...name}
