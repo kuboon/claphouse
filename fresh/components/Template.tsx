@@ -2,7 +2,9 @@
 /** @jsxFrag Fragment */
 import { Fragment, h, Head, VNode } from "../deps.ts";
 
-export default function Template({ children }: { children: VNode }) {
+export default function Template(
+  { children }: { children: VNode | VNode[] },
+): VNode {
   return (
     <>
       <Head>
@@ -13,7 +15,7 @@ export default function Template({ children }: { children: VNode }) {
         <a href="/" target="_blank">👏Claphouse</a>
       </h1>
       {children}
-      <footer className="copyinfo">Built by kuboon</footer>
+      <footer className="copyinfo">Built by <a href="https://twitter.com/kuboon">kuboon</a></footer>
     </>
   );
 }

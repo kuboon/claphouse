@@ -26,15 +26,17 @@ function CreateRoom() {
   params.append("uuid", uuid);
 
   return (
-    <>
+    <form>
       <label>
-        Room Name:
+        Room Name<br />
         <input
           type="text"
           {...name}
         />
       </label>
-      <a href={"/play#" + params.toString()}>Create Room</a>
-    </>
+      <div>
+        <a href={"/play#" + params.toString()}>Create Room</a>
+      </div>
+    </form>
   );
 }

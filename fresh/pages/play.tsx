@@ -3,6 +3,7 @@
 import { SoundToggle } from "../components/SoundToggle.tsx";
 import { PlayButtons, WireToggle, wsConnect } from "../components/WireToggle.tsx";
 import { Log, log } from "../components/Log.tsx";
+import Template from "../components/Template.tsx";
 import {
   Fragment,
   h,
@@ -16,10 +17,8 @@ export const config: PageConfig = { runtimeJS: true };
 
 export default function PlayContainer() {
   return (
-    <>
+    <Template>
       <Head>
-        <title>👏Claphouse</title>
-        <link rel="stylesheet" href="/style.css" />
         <style>
           {`
           button {
@@ -28,14 +27,10 @@ export default function PlayContainer() {
         `}
         </style>
       </Head>
-      <h1>
-        <a href="/" target="_blank">👏Claphouse</a>
-      </h1>
       <main id="play">
         <Play />
       </main>
-      <footer className="copyinfo">Built by kuboon</footer>
-    </>
+    </Template>
   );
 }
 function Play() {
