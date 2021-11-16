@@ -1,3 +1,4 @@
+import { log } from "../components/Log.tsx";
 import { IS_BROWSER } from "../deps.ts";
 
 export const list: Record<string, { button: string; files: string[] }> = {
@@ -23,6 +24,7 @@ export function prepareSounds() {
 let loadSoundsP: Promise<void>;
 async function loadSounds() {
   if (!context) return;
+  log("Loading sounds...");
   const files = Object.values(list).flatMap(({ files }) => files);
   const promises = files
     .map((n) =>
@@ -31,7 +33,7 @@ async function loadSounds() {
         .then((x) => context.decodeAudioData(x))
         .then((buf) => (buffers[n] = buf))
     );
-  await Promise.all(promises);
+  await Promise.all(promises).then(() => log("sounds loaded"));
 }
 
 function sample<T>(arr: T[]): T {

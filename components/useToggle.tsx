@@ -3,8 +3,8 @@
 import { Fragment, h, useCallback, useState } from "../deps.ts";
 
 type ToggleProps = { onClick: (newVal: boolean) => void; children: string };
-export function useToggle() {
-  const [isOn, setIsOn] = useState(false);
+export function useToggle(value = false) {
+  const [isOn, setIsOn] = useState(value);
   const Toggle = ({ onClick, children }: ToggleProps) => {
     const onClick2 = useCallback(() => {
       const newVal = !isOn;

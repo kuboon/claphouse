@@ -1,7 +1,11 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 import { SoundToggle } from "../components/SoundToggle.tsx";
-import { PlayButtons, WireToggle, wsConnect } from "../components/WireToggle.tsx";
+import {
+  PlayButtons,
+  WireToggle,
+  wsConnect,
+} from "../components/WireToggle.tsx";
 import { Log, log } from "../components/Log.tsx";
 import Template from "../components/Template.tsx";
 import {
@@ -49,8 +53,10 @@ function Play() {
   return (
     <>
       <h2>{name}</h2>
-      <SoundToggle />
-      <WireToggle />
+      <div className='toggles'>
+        <WireToggle />
+        <SoundToggle />
+      </div>
       <PlayButtons />
       <Log />
     </>

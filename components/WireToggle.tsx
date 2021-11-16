@@ -6,7 +6,7 @@ import { useToggle } from "./useToggle.tsx";
 import { list, play } from "../lib/sound.ts";
 
 export function WireToggle() {
-  const { Toggle, setIsOn } = useToggle();
+  const { Toggle, setIsOn } = useToggle(true);
   if (ws) {
     ws.onclose = () => {
       log("切断しました");
