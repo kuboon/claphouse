@@ -44,6 +44,9 @@ export function play(tag: string) {
   const file = sample(list[tag].files);
   const source = context.createBufferSource();
   source.buffer = buffers[file];
-  source.connect(context.destination);
+  const gain = context.createGain();
+  gain.connect(context.destination);
+  gain.gain.value = Math.random() * 0.5 + 0.5;
+  source.connect(gain);
   source.start();
 }
