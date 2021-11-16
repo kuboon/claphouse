@@ -6,15 +6,22 @@ type ToggleProps = { onClick: (newVal: boolean) => void; children: string };
 export function useToggle(value = false) {
   const [isOn, setIsOn] = useState(value);
   const Toggle = ({ onClick, children }: ToggleProps) => {
-    const onClick2 = useCallback(() => {
-      const newVal = !isOn;
-      setIsOn(newVal);
-      onClick(newVal);
-    }, [isOn]);
-    const className = isOn ? "switch on" : "switch";
+    const onChange: h.JSX.GenericEventHandler<HTMLInputElement> = useCallback(
+      (e) => {
+        const { checked } = e.currentTarget;
+        setIsOn(checked);
+        onClick(checked);
+      },
+      [onClick, setIsOn],
+    );
     return (
       <>
-        <span className={className} onClick={onClick2} />
+        <input
+          type="checkbox"
+          className="toggle"
+          checked={isOn}
+          onChange={onChange}
+        />
         {children}
       </>
     );
