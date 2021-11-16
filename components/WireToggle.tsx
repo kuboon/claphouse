@@ -20,7 +20,7 @@ function onClick(newVal: boolean) {
     wsConnect(ws.url);
   } else {
     ws.onclose = () => {
-      log("切断しました");
+      log("disconnected");
     };
     ws.close();
   }
@@ -45,7 +45,7 @@ export function PlayButtons() {
 let ws: WebSocket;
 const wsHooks: Partial<WebSocket> = {
   onmessage: ({ data }) => play(data),
-  onopen: () => log("接続しました"),
+  onopen: () => log("connected"),
 };
 export function wsConnect(url: string) {
   if (ws) {

@@ -15,7 +15,7 @@ export function useToggle(value = false) {
       [onClick, setIsOn],
     );
     return (
-      <>
+      <label className='toggle'>
         <input
           type="checkbox"
           className="toggle"
@@ -23,7 +23,7 @@ export function useToggle(value = false) {
           onChange={onChange}
         />
         {children}
-      </>
+      </label>
     );
   };
   return { Toggle, isOn, setIsOn };
