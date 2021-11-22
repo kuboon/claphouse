@@ -3,6 +3,7 @@
 import { h } from "../deps.ts";
 
 export function log(msg: string) {
+  console.log(msg);
   const elm = document.getElementById("log")!;
   elm.insertAdjacentHTML("beforeend", `<p>${msg}</p>`);
   elm.scrollTo({
