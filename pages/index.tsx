@@ -18,13 +18,24 @@ const useInput = (initialValue: string) => {
     onChange: (e: Event) => set((e.target! as HTMLInputElement).value),
   };
 };
+function dec2hex (dec: number) {
+  return dec.toString(16).padStart(2, "0")
+}
+
+// since Safari has no crypt.randomUUID()
+function generateId(len = 40) {
+  const arr = new Uint8Array(len / 2);
+  window.crypto.getRandomValues(arr);
+  return Array.from(arr, dec2hex).join("");
+}
 function CreateRoom() {
   const name = useInput("");
-  const uuid = crypto.randomUUID();
+  const uuid = generateId();
+
   const params = new URLSearchParams();
   params.append("name", name.value);
   params.append("uuid", uuid);
-
+  const href = "/play#" + params.toString();
   return (
     <form>
       <label>
@@ -35,7 +46,7 @@ function CreateRoom() {
         />
       </label>
       <div>
-        <a href={"/play#" + params.toString()}>Create Room</a>
+        <a href={href}>Create Room</a>
       </div>
     </form>
   );
