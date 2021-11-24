@@ -11,6 +11,14 @@ export const list: Record<string, { button: string; files: string[] }> = {
       "clap3.m4a",
     ],
   },
+  laugh: {
+    button: "🤣",
+    files: [
+      "laugh0.m4a",
+      "laugh1.m4a",
+      "laugh2.m4a",
+    ],
+  },
 };
 let context: AudioContext;
 export function audioContext(
@@ -18,7 +26,7 @@ export function audioContext(
 ): AudioContext | undefined {
   if (!IS_BROWSER) return;
   if (reconnect) {
-    context.onstatechange = null
+    context.onstatechange = null;
     context.close();
   }
   if (reconnect || !context) context = new AudioContext();
