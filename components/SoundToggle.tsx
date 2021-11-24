@@ -12,7 +12,7 @@ export function SoundToggle() {
     if (ctx) {
       const onstatechange = () => {
         const state = audioContext()!.state as string;
-        log(`context.state: ${state}`);
+        log(`audioContext.state: ${state}`);
         setIsOn(state === "running");
         if (state === "interrupted") {
           audioContext({ reconnect: true });

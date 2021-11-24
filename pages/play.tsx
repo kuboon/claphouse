@@ -30,7 +30,7 @@ export default function PlayContainer() {
           }
         `}
         </style>
-        <script src="/inline-console.min.js" />
+        {/* <script src="/inline-console.min.js" /> */}
       </Head>
       <main id="play">
         <Play />
