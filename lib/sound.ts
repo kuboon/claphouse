@@ -13,8 +13,14 @@ export const list: Record<string, { button: string; files: string[] }> = {
   },
 };
 let context: AudioContext;
-export function audioContext({reconnect = false} = {}): AudioContext | undefined {
+export function audioContext(
+  { reconnect = false } = {},
+): AudioContext | undefined {
   if (!IS_BROWSER) return;
+  if (reconnect) {
+    context.onstatechange = null
+    context.close();
+  }
   if (reconnect || !context) context = new AudioContext();
   return context;
 }
