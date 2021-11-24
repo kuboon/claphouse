@@ -40,7 +40,7 @@ function sample<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 export function play(tag: string) {
-  if (!context) return;
+  if (!context || context.state !== 'running') return;
   const file = sample(list[tag].files);
   const source = context.createBufferSource();
   source.buffer = buffers[file];
