@@ -54,11 +54,14 @@ export function play(tag: string) {
   if (!context || context.state !== "running") return;
   const file = sample(list[tag].files);
   if (!buffers[file]) return;
-  const source = context.createBufferSource();
-  source.buffer = buffers[file];
   const gain = context.createGain();
   gain.connect(context.destination);
   gain.gain.value = Math.random() * 0.5 + 0.5;
+
+  const source = context.createBufferSource();
+  source.buffer = buffers[file];
+  source.playbackRate.value = Math.random() + 0.5;
+
   source.connect(gain);
   source.start();
 }
