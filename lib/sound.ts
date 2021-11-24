@@ -15,13 +15,13 @@ export const list: Record<string, { button: string; files: string[] }> = {
 const buffers = {} as Record<string, AudioBuffer>;
 export const context = IS_BROWSER ? new AudioContext() : undefined;
 
+let loadSoundsP: Promise<void>;
 export function prepareSounds() {
   if (!loadSoundsP) {
     loadSoundsP = loadSounds();
   }
   return loadSoundsP;
 }
-let loadSoundsP: Promise<void>;
 async function loadSounds() {
   if (!context) return;
   log("Loading sounds...");

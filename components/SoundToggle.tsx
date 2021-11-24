@@ -5,7 +5,10 @@ import { context, prepareSounds } from "../lib/sound.ts";
 import { useToggle } from "./useToggle.tsx";
 
 export function SoundToggle() {
-  const { Toggle } = useToggle();
+  const { Toggle, setIsOn } = useToggle();
+  if (context) {
+    context.onstatechange = () => setIsOn(context?.state === "running");
+  }
   return <Toggle onClick={onClick}>🔊</Toggle>;
 }
 function onClick(newVal: boolean) {
