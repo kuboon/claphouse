@@ -71,5 +71,5 @@ export function play(tag: string) {
   source.playbackRate.value = Math.random() + 0.5;
 
   source.connect(gain);
-  source.start(0);
+  source.start(context.currentTime);
 }
