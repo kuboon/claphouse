@@ -12,16 +12,27 @@ export const list: Record<string, { button: string; files: string[] }> = {
     ],
   },
 };
-const buffers = {} as Record<string, AudioBuffer>;
-export const context = IS_BROWSER ? new AudioContext() : undefined;
+let context: AudioContext;
+export function audioContext(
+  { reconnect = false } = {},
+): AudioContext | undefined {
+  if (!IS_BROWSER) return;
+  if (reconnect) {
+    context.onstatechange = null
+    context.close();
+  }
+  if (reconnect || !context) context = new AudioContext();
+  return context;
+}
 
+let loadSoundsP: Promise<void>;
 export function prepareSounds() {
   if (!loadSoundsP) {
     loadSoundsP = loadSounds();
   }
   return loadSoundsP;
 }
-let loadSoundsP: Promise<void>;
+const buffers = {} as Record<string, AudioBuffer>;
 async function loadSounds() {
   if (!context) return;
   log("Loading sounds...");
@@ -30,7 +41,7 @@ async function loadSounds() {
     .map((n) =>
       fetch(`/sounds/${n}`)
         .then((r) => r.arrayBuffer())
-        .then((x) => context.decodeAudioData(x))
+        .then((x) => context!.decodeAudioData(x))
         .then((buf) => (buffers[n] = buf))
     );
   await Promise.all(promises).then(() => log("sounds loaded"));
@@ -40,8 +51,9 @@ function sample<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 export function play(tag: string) {
-  if (!context) return;
+  if (!context || context.state !== "running") return;
   const file = sample(list[tag].files);
+  if (!buffers[file]) return;
   const source = context.createBufferSource();
   source.buffer = buffers[file];
   const gain = context.createGain();

@@ -1,17 +1,35 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { h } from "../deps.ts";
-import { context, prepareSounds } from "../lib/sound.ts";
+import { h, useEffect } from "../deps.ts";
+import { audioContext, prepareSounds } from "../lib/sound.ts";
 import { useToggle } from "./useToggle.tsx";
+import { log } from "./Log.tsx";
 
 export function SoundToggle() {
-  const { Toggle } = useToggle();
+  const { Toggle, setIsOn } = useToggle();
+  const ctx = audioContext();
+  useEffect(() => {
+    if (ctx) {
+      const onstatechange = () => {
+        const state = audioContext()!.state as string;
+        log(`audioContext.state: ${state}`);
+        setIsOn(state === "running");
+        if (state === "interrupted") {
+          audioContext({ reconnect: true });
+        }
+      };
+      ctx.onstatechange = onstatechange;
+    }
+  }, [ctx]);
   return <Toggle onClick={onClick}>🔊</Toggle>;
 }
 function onClick(newVal: boolean) {
+  const ctx = audioContext();
+  if (!ctx) return;
   if (newVal) {
-    prepareSounds().then(() => context?.resume());
+    ctx.resume();
+    prepareSounds();
   } else {
-    context?.suspend();
+    ctx.suspend();
   }
 }

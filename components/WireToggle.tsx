@@ -9,7 +9,7 @@ export function WireToggle() {
   const { Toggle, setIsOn } = useToggle(true);
   if (ws) {
     ws.onclose = () => {
-      log("切断しました");
+      log("disconnected");
       setIsOn(false);
     };
   }
@@ -19,9 +19,6 @@ function onClick(newVal: boolean) {
   if (newVal) {
     wsConnect(ws.url);
   } else {
-    ws.onclose = () => {
-      log("disconnected");
-    };
     ws.close();
   }
 }
