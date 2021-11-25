@@ -19,9 +19,11 @@ import {
 
 export const config: PageConfig = { runtimeJS: true };
 
-export default function PlayContainer() {
+export default function PlayContainer({url}: {url: URL}) {
+  const url2 = url || location
+  const pageName = url2.search.substring(1)
   return (
-    <Template>
+    <Template pageName={pageName}>
       <Head>
         <style>
           {`
@@ -42,10 +44,9 @@ function Play() {
   if (!IS_BROWSER) {
     return <p>loading..</p>;
   }
-  const params = new URLSearchParams(window.location.hash.substring(1));
-  const uuid = params.get("uuid");
-  const name = params.get("name");
-  if (!uuid) {
+  const uuid = location.hash.substring(1)
+  const name = location.search.substring(1)
+  if (uuid === "") {
     return <p>Invalid URL</p>;
   }
   const wsUrl = `wss://${location.host}/ws/${uuid}`;

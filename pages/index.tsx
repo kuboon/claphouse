@@ -5,8 +5,13 @@ import Template from "../components/Template.tsx";
 
 export const config: PageConfig = { runtimeJS: true };
 export default function Home() {
+  const msg = encodeURIComponent('👏Claphouse')
+  const ogImage = `https://og.kbn.one/${msg}.png?theme=light&md=1&fontSize=100px`
   return (
-    <Template>
+    <Template pageName="Create Room">
+      <Head>
+        <meta property="og:image" content={ogImage} />
+      </Head>
       <CreateRoom />
     </Template>
   );
@@ -33,9 +38,7 @@ function CreateRoom() {
   const uuid = generateId();
 
   const params = new URLSearchParams();
-  params.append("name", name.value);
-  params.append("uuid", uuid);
-  const href = "/play#" + params.toString();
+  const href = `/play?${name.value}#${uuid}`
   return (
     <form>
       <label>
