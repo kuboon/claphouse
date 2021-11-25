@@ -21,7 +21,7 @@ export const config: PageConfig = { runtimeJS: true };
 
 export default function PlayContainer({url}: {url: URL}) {
   const url2 = url || location
-  const pageName = url2.pathname.split('/').pop()!
+  const pageName = decodeURI(url2.pathname.split('/').pop()!)
   return (
     <Template pageName={pageName}>
       <Head>
