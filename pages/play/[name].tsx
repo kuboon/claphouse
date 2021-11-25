@@ -1,13 +1,13 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { SoundToggle } from "../components/SoundToggle.tsx";
+import { SoundToggle } from "../../components/SoundToggle.tsx";
 import {
   PlayButtons,
   WireToggle,
   wsConnect,
-} from "../components/WireToggle.tsx";
-import { Log, log } from "../components/Log.tsx";
-import Template from "../components/Template.tsx";
+} from "../../components/WireToggle.tsx";
+import { Log, log } from "../../components/Log.tsx";
+import Template from "../../components/Template.tsx";
 import {
   Fragment,
   h,
@@ -15,13 +15,15 @@ import {
   IS_BROWSER,
   PageConfig,
   useEffect,
-} from "../deps.ts";
+} from "../../deps.ts";
 
 export const config: PageConfig = { runtimeJS: true };
 
-export default function PlayContainer() {
+export default function PlayContainer({url}: {url: URL}) {
+  const url2 = url || location
+  const pageName = url2.pathname.split('/').pop()!
   return (
-    <Template>
+    <Template pageName={pageName}>
       <Head>
         <style>
           {`
@@ -33,6 +35,7 @@ export default function PlayContainer() {
         {/* <script src="/inline-console.min.js" /> */}
       </Head>
       <main id="play">
+        <h2>{pageName}</h2>
         <Play />
       </main>
     </Template>
@@ -42,10 +45,8 @@ function Play() {
   if (!IS_BROWSER) {
     return <p>loading..</p>;
   }
-  const params = new URLSearchParams(window.location.hash.substring(1));
-  const uuid = params.get("uuid");
-  const name = params.get("name");
-  if (!uuid) {
+  const uuid = location.hash.substring(1)
+  if (uuid === "") {
     return <p>Invalid URL</p>;
   }
   const wsUrl = `wss://${location.host}/ws/${uuid}`;
@@ -53,7 +54,6 @@ function Play() {
 
   return (
     <>
-      <h2>{name}</h2>
       <div className='toggles'>
         <WireToggle />
         <SoundToggle />

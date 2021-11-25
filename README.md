@@ -1,4 +1,7 @@
 # fresh project
+```
+deno install -A -f --no-check -n fresh https://raw.githubusercontent.com/lucacasonato/fresh/main/cli.ts
+```
 
 ### Usage
 
