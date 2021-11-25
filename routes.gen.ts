@@ -3,16 +3,16 @@
 // To update this file, run `fresh routes`.
 
 import * as $0 from "./pages/ws/[uuid].ts";
-import * as $1 from "./pages/play.tsx";
-import * as $2 from "./pages/_render.tsx";
-import * as $3 from "./pages/index.tsx";
+import * as $1 from "./pages/_render.tsx";
+import * as $2 from "./pages/index.tsx";
+import * as $3 from "./pages/play/[name].tsx";
 
 const routes = {
   pages: {
     "./pages/ws/[uuid].ts": $0,
-    "./pages/play.tsx": $1,
-    "./pages/_render.tsx": $2,
-    "./pages/index.tsx": $3,
+    "./pages/_render.tsx": $1,
+    "./pages/index.tsx": $2,
+    "./pages/play/[name].tsx": $3,
   },
   baseUrl: import.meta.url,
 };

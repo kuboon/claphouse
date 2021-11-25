@@ -1,13 +1,13 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { SoundToggle } from "../components/SoundToggle.tsx";
+import { SoundToggle } from "../../components/SoundToggle.tsx";
 import {
   PlayButtons,
   WireToggle,
   wsConnect,
-} from "../components/WireToggle.tsx";
-import { Log, log } from "../components/Log.tsx";
-import Template from "../components/Template.tsx";
+} from "../../components/WireToggle.tsx";
+import { Log, log } from "../../components/Log.tsx";
+import Template from "../../components/Template.tsx";
 import {
   Fragment,
   h,
@@ -15,13 +15,13 @@ import {
   IS_BROWSER,
   PageConfig,
   useEffect,
-} from "../deps.ts";
+} from "../../deps.ts";
 
 export const config: PageConfig = { runtimeJS: true };
 
-export default function PlayContainer({url}: {url: URL}) {
-  const url2 = url || location
-  const pageName = url2.search.substring(1)
+export default function PlayContainer({ url }: { url: URL }) {
+  const url2 = url || location;
+  const pageName = url2.pathname.split("/").pop()!;
   return (
     <Template pageName={pageName}>
       <Head>
@@ -35,17 +35,17 @@ export default function PlayContainer({url}: {url: URL}) {
         {/* <script src="/inline-console.min.js" /> */}
       </Head>
       <main id="play">
-        <Play />
+        <Play pageName={pageName} />
       </main>
     </Template>
   );
 }
-function Play() {
+function Play({ pageName }: { pageName: string }) {
   if (!IS_BROWSER) {
     return <p>loading..</p>;
   }
-  const uuid = location.hash.substring(1)
-  const name = location.search.substring(1)
+  const uuid = location.hash.substring(1);
+  const name = pageName;
   if (uuid === "") {
     return <p>Invalid URL</p>;
   }
@@ -55,7 +55,7 @@ function Play() {
   return (
     <>
       <h2>{name}</h2>
-      <div className='toggles'>
+      <div className="toggles">
         <WireToggle />
         <SoundToggle />
       </div>
