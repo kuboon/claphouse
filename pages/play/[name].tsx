@@ -19,9 +19,9 @@ import {
 
 export const config: PageConfig = { runtimeJS: true };
 
-export default function PlayContainer({ url }: { url: URL }) {
-  const url2 = url || location;
-  const pageName = url2.pathname.split("/").pop()!;
+export default function PlayContainer({url}: {url: URL}) {
+  const url2 = url || location
+  const pageName = url2.pathname.split('/').pop()!
   return (
     <Template pageName={pageName}>
       <Head>
@@ -35,17 +35,17 @@ export default function PlayContainer({ url }: { url: URL }) {
         {/* <script src="/inline-console.min.js" /> */}
       </Head>
       <main id="play">
-        <Play pageName={pageName} />
+        <h2>{pageName}</h2>
+        <Play />
       </main>
     </Template>
   );
 }
-function Play({ pageName }: { pageName: string }) {
+function Play() {
   if (!IS_BROWSER) {
     return <p>loading..</p>;
   }
-  const uuid = location.hash.substring(1);
-  const name = pageName;
+  const uuid = location.hash.substring(1)
   if (uuid === "") {
     return <p>Invalid URL</p>;
   }
@@ -54,8 +54,7 @@ function Play({ pageName }: { pageName: string }) {
 
   return (
     <>
-      <h2>{name}</h2>
-      <div className="toggles">
+      <div className='toggles'>
         <WireToggle />
         <SoundToggle />
       </div>

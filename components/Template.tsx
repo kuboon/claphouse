@@ -11,7 +11,7 @@ export default function Template(
       <Head>
         <title>{pageName} 👏Claphouse</title>
         <link rel="stylesheet" href="/style.css" />
-        <meta name="og:image" content={ogImage} />
+        <meta property="og:image" content={ogImage} />
       </Head>
       <h1>
         <a href="/" target="_blank">👏Claphouse</a>
