@@ -16,6 +16,7 @@ import {
   PageConfig,
   useEffect,
 } from "../../deps.ts";
+import QR from "../../components/QR.tsx";
 
 export const config: PageConfig = { runtimeJS: true };
 
@@ -25,14 +26,7 @@ export default function PlayContainer({url}: {url: URL}) {
   return (
     <Template pageName={pageName}>
       <Head>
-        <style>
-          {`
-          button {
-            font-size: 20vmin;
-          }
-        `}
-        </style>
-        {/* <script src="/inline-console.min.js" /> */}
+        <script src="/inline-console.min.js" />
       </Head>
       <main id="play">
         <h2>{pageName}</h2>
@@ -57,6 +51,7 @@ function Play() {
       <div className='toggles'>
         <WireToggle />
         <SoundToggle />
+        <QR data={location.toString()} />
       </div>
       <PlayButtons />
       <Log />

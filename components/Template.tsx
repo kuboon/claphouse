@@ -1,10 +1,10 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h, Head, VNode } from "../deps.ts";
+import { Fragment, h, Head, ComponentChildren} from "../deps.ts";
 
 export default function Template(
-  { pageName, children }: { pageName: string, children: VNode | VNode[] },
-): VNode {
+  { pageName, children }: { pageName: string, children: ComponentChildren },
+) {
   const ogImage = `https://og.kbn.one/%F0%9F%91%8Fclaphouse%0A%0A${pageName}.png?theme=light&md=1&fontSize=200px`
   return (
     <>
