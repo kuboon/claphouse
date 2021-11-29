@@ -60,14 +60,14 @@ button.btn {
   height: 30px;
 }
 .qr {
-  font-family: monospace;
-  white-space: pre;
   background-color: white;
-  font-size: 5px;
-  line-height: 5px;
-  transform: scaleY(0.64);
+  font-size: xx-small;
+  line-height: 100%;
+  transform: scale(0.5);
+  transform-origin: left top;
   padding: 20px;
   position: absolute;
+  left: 0;
 }
 .buttons button {
   font-size: 20vmin;
