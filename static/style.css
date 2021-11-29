@@ -60,6 +60,8 @@ button.btn {
   height: 30px;
 }
 .qr {
+  font-family: monospace;
+  white-space: pre;
   background-color: white;
   font-size: 5px;
   line-height: 5px;
