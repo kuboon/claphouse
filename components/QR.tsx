@@ -20,6 +20,6 @@ export default function QRcode({ data }: { data: string }) {
 }
 function qrString(data: string) {
   const qr = QR.encode(data);
-  return qr.map((x) => String.fromCharCode(...x.map((y) => y ? 9608 : 8195)))
+  return qr.map((x) => String.fromCharCode(...x.map((y) => y ? 9608 : 32)))
     .join("\n");
 }
