@@ -68,7 +68,7 @@ export function play(tag: string) {
 
   const source = context.createBufferSource();
   source.buffer = buffers[file];
-  source.playbackRate.value = Math.random() + 0.5;
+  source.playbackRate.value = Math.random() * 0.8 + 0.7;
 
   source.connect(gain);
   source.start(context.currentTime);
