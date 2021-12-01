@@ -38,7 +38,7 @@ function CreateRoom() {
   const uuid = generateId();
 
   const params = new URLSearchParams();
-  const href = `/play/${name.value}#${uuid}`
+  const href = `/play/${name.value || " "}#${uuid}`
   return (
     <form>
       <label>
