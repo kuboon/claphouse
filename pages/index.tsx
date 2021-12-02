@@ -18,7 +18,7 @@ export default function Home() {
         <li>Create a room for your online talk event</li>
         <li>Share the URL with your attendees</li>
         <li>Clap! Clap!</li>
-        <li>📶 Connect to the remote room. You need on after you suspend your browser.</li>
+        <li>📶 Connect to the remote room. You need to turn on after you suspend your browser.</li>
         <li>🔊 Play sound on your local device. It also receives others at the room.</li>
       </ol>
       <h2>使い方</h2>
