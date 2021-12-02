@@ -5,14 +5,10 @@ import { log } from "./Log.tsx";
 import { useToggle } from "./useToggle.tsx";
 import { list, play } from "../lib/sound.ts";
 
+let setIsWire = (val: boolean) => {};
 export function WireToggle() {
   const { Toggle, setIsOn } = useToggle(true);
-  if (ws) {
-    ws.onclose = () => {
-      log("disconnected");
-      setIsOn(false);
-    };
-  }
+  setIsWire = setIsOn;
   return <Toggle onClick={onClick}>📶</Toggle>;
 }
 function onClick(newVal: boolean) {
@@ -43,11 +39,20 @@ let ws: WebSocket;
 const wsHooks: Partial<WebSocket> = {
   onmessage: ({ data }) => play(data),
   onopen: () => log("connected"),
+  onclose: () => {
+      log("disconnected");
+      setIsWire(false);
+  }
 };
 export function wsConnect(url: string) {
   if (ws) {
     ws.close();
   }
-  ws = new WebSocket(url);
-  Object.assign(ws, wsHooks);
+  try {
+    ws = new WebSocket(url);
+    Object.assign(ws, wsHooks);
+  } catch (e) {
+    setIsWire(false);
+    log(e);
+  }
 }

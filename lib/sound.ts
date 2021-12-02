@@ -19,6 +19,12 @@ export const list: Record<string, { button: string; files: string[] }> = {
       "laugh2.m4a",
     ],
   },
+  hee: {
+    button: "💡",
+    files: [
+      "hee0.m4a",
+    ],
+  },
 };
 let context: AudioContext;
 export function audioContext(
