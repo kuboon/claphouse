@@ -6,12 +6,8 @@ import Template from "../components/Template.tsx";
 export const config: PageConfig = { runtimeJS: true };
 export default function Home() {
   const msg = encodeURIComponent('👏Claphouse')
-  const ogImage = `https://og.kbn.one/${msg}.png?theme=light&md=1&fontSize=100px`
   return (
     <Template pageName="Create Room">
-      <Head>
-        <meta property="og:image" content={ogImage} />
-      </Head>
       <CreateRoom />
       <h2>Usage</h2>
       <ol>
