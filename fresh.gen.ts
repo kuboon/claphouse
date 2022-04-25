@@ -6,7 +6,8 @@ import * as $0 from "./routes/_render.tsx";
 import * as $1 from "./routes/index.tsx";
 import * as $2 from "./routes/play/[name].tsx";
 import * as $3 from "./routes/ws/[uuid].ts";
-import * as $$0 from "./islands/Play.tsx";
+import * as $$0 from "./islands/CreateRoom.tsx";
+import * as $$1 from "./islands/Play.tsx";
 
 const manifest = {
   routes: {
@@ -16,7 +17,8 @@ const manifest = {
     "./routes/ws/[uuid].ts": $3,
   },
   islands: {
-    "./islands/Play.tsx": $$0,
+    "./islands/CreateRoom.tsx": $$0,
+    "./islands/Play.tsx": $$1,
   },
   baseUrl: import.meta.url,
 };

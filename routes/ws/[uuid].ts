@@ -14,11 +14,9 @@ export const handler: Handlers = {
     }
     const channel = new BroadcastChannel(uuid);
     channel.onmessage = (ev) => {
-      console.log('channel -> socket', ev.data);
       socket.send(ev.data);
     };
     socket.onmessage = (ev) => {
-      console.log('socket -> channel', ev.data);
       channel.postMessage(ev.data);
     };
     socket.onclose = () => {

@@ -16,16 +16,16 @@ import {
 import QR from "../components/QR.tsx";
 
 export default function Play() {
-  if(!IS_BROWSER)return <p>loading</p>
+  if(!IS_BROWSER)return <div id='play'>loading</div>
   const uuid = location.hash.substring(1)
   if (uuid === "") {
-    return <p>Invalid URL</p>;
+    return <div id='play'>Invalid URL</div>;
   }
   const wsUrl = `wss://${location.host}/ws/${uuid}`;
   useEffect(() => wsConnect(wsUrl), []);
 
   return (
-    <>
+    <div id='play'>
       <div className='toggles'>
         <WireToggle />
         <SoundToggle />
@@ -33,6 +33,6 @@ export default function Play() {
       </div>
       <PlayButtons />
       <Log />
-    </>
+    </div>
   );
 }

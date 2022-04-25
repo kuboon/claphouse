@@ -1,7 +1,8 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h, Head, PageConfig, useState } from "../client_deps.ts";
 import Template from "../components/Template.tsx";
+import CreateRoom from "../islands/CreateRoom.tsx";
+import { h } from "../client_deps.ts";
 
 export default function Home() {
   const msg = encodeURIComponent('👏Claphouse')
@@ -25,43 +26,5 @@ export default function Home() {
         <li>🔊 手元の端末から音を鳴らします。ルームへ接続中は、全員の音がなります。マナーモードだと音が鳴りませんのでご確認ください。</li>
       </ol>
     </Template>
-  );
-}
-const useInput = (initialValue: string) => {
-  const [value, set] = useState(initialValue);
-  return {
-    value,
-    onChange: (e: Event) => set((e.target! as HTMLInputElement).value),
-  };
-};
-function dec2hex (dec: number) {
-  return dec.toString(16).padStart(2, "0")
-}
-
-// since Safari has no crypt.randomUUID()
-function generateId(len = 40) {
-  const arr = new Uint8Array(len / 2);
-  window.crypto.getRandomValues(arr);
-  return Array.from(arr, dec2hex).join("");
-}
-function CreateRoom() {
-  const name = useInput("");
-  const uuid = generateId();
-
-  const params = new URLSearchParams();
-  const href = `/play/${name.value || " "}#${uuid}`
-  return (
-    <form>
-      <label>
-        Room Name<br />
-        <input
-          type="text"
-          {...name}
-        />
-      </label>
-      <div>
-        <a href={href}>Create Room</a>
-      </div>
-    </form>
   );
 }

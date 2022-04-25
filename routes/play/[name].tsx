@@ -15,7 +15,7 @@ export default function PlayContainer({url}: {url: URL}) {
       <Head>
         {/* <script src="/inline-console.min.js" /> */}
       </Head>
-      <main id="play">
+      <main>
         <h2>{pageName}</h2>
         <Play />
       </main>
