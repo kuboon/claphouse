@@ -18,10 +18,9 @@ export default function Chat() {
   return (
     <>
       <div id="fb-root"></div>
-      <div id="fb-customer-chat" class="fb-customerchat">
-      </div>
+      <div id="fb-customer-chat" class="fb-customerchat" />
       <script dangerouslySetInnerHTML={{__html}} />
-      <script src='https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js' />
+      <script src='https://connect.facebook.net/ja_JP/sdk/xfbml.customerchat.js' />
     </>
   );
 }
