@@ -1,16 +1,7 @@
 {
-  "compilerOptions": {
-    "allowJs": true,
-    "target": "esnext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "dom.asynciterable",
-      "deno.ns",
-      "deno.unstable"
-    ],
-    "jsx": "react"
-  },
-  "lint": {},
-  "format": {}
+  "importMap": "import_map.json",
+  "tasks": {
+    "setup": "deno install -A -f --no-check -n fresh -r https://raw.githubusercontent.com/lucacasonato/fresh/main/cli.ts",
+    "start": "deno run -A --watch main.ts"
+  }
 }

@@ -1,5 +1,4 @@
 import { log } from "../components/Log.tsx";
-import { IS_BROWSER } from "../deps.ts";
 
 export const list: Record<string, { button: string; files: string[] }> = {
   clap: {
@@ -30,7 +29,6 @@ let context: AudioContext;
 export function audioContext(
   { reconnect = false } = {},
 ): AudioContext | undefined {
-  if (!IS_BROWSER) return;
   if (reconnect) {
     context.onstatechange = null;
     context.close();

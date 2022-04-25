@@ -1,6 +1,6 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h, Head, ComponentChildren} from "../deps.ts";
+import { Fragment, h, Head, ComponentChildren} from "../client_deps.ts";
 
 export default function Template(
   { pageName, children }: { pageName: string, children: ComponentChildren },

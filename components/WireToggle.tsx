@@ -1,6 +1,6 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h } from "../deps.ts";
+import { Fragment, h } from "../client_deps.ts";
 import { log } from "./Log.tsx";
 import { useToggle } from "./useToggle.tsx";
 import { list, play } from "../lib/sound.ts";

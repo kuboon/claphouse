@@ -1,9 +1,8 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h, Head, PageConfig, useState } from "../deps.ts";
+import { Fragment, h, Head, PageConfig, useState } from "../client_deps.ts";
 import Template from "../components/Template.tsx";
 
-export const config: PageConfig = { runtimeJS: true };
 export default function Home() {
   const msg = encodeURIComponent('👏Claphouse')
   return (

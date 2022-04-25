@@ -1,18 +1,18 @@
-# fresh project
-```
-deno install -A -f --no-check -n fresh https://raw.githubusercontent.com/lucacasonato/fresh/main/cli.ts
-```
+# Claphouse
+
+see https://claphouse.kbn.one
 
 ### Usage
 
 Start the project:
 
 ```
-deno run -A --watch main.ts
+deno task start
 ```
 
-After adding, removing, or moving a page in the `pages` directory, run:
+After adding, removing, or moving a page in the `routes` or directory, or adding,
+removing, or moving an island in the `islands` directory, run:
 
 ```
-fresh routes
+fresh manifest
 ```

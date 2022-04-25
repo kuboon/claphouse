@@ -1,0 +1,8 @@
+{
+  "imports": {
+    "https://crux.land/router@0.0.11": "./router.ts",
+    "https://crux.land/api/get/router@0.0.11": "./router.ts",
+    "https://crux.land/api/get/uYQG.ts": "./router.ts",
+    "https://crux.land/api/get/uYQG": "./router.ts"
+  }
+}

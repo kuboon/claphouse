@@ -1,5 +1,5 @@
 import { QR } from "https://taisukef.github.io/qrcode-generator/es/QR.js";
-import { h, Fragment, useState } from "../deps.ts";
+import { h, Fragment, useState } from "../client_deps.ts";
 
 declare interface QR {
   encode: (str: string) => string;

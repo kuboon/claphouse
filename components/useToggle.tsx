@@ -1,6 +1,6 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h, useCallback, useState } from "../deps.ts";
+import { Fragment, h, useCallback, useState } from "../client_deps.ts";
 
 type ToggleProps = { onClick: (newVal: boolean) => void; children: string };
 export function useToggle(value = false) {
