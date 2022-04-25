@@ -3,9 +3,9 @@
 import Template from "../components/Template.tsx";
 import CreateRoom from "../islands/CreateRoom.tsx";
 import { h } from "../client_deps.ts";
+import Chat from "../components/Chat.tsx";
 
 export default function Home() {
-  const msg = encodeURIComponent('👏Claphouse')
   return (
     <Template pageName="Create Room">
       <CreateRoom />
@@ -25,6 +25,7 @@ export default function Home() {
         <li>📶 ルームへ接続します。スマホをロックして復帰した後など、接続が切れることがありますのでオンにしてください。</li>
         <li>🔊 手元の端末から音を鳴らします。ルームへ接続中は、全員の音がなります。マナーモードだと音が鳴りませんのでご確認ください。</li>
       </ol>
+      <Chat />
     </Template>
   );
 }
