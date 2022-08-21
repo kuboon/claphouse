@@ -71,11 +71,6 @@ button.btn {
 }
 .qr {
   background-color: white;
-  font-size: 11px;
-  line-height: 100%;
-  transform: scale(0.5);
-  transform-origin: left top;
-  padding: 20px;
   position: absolute;
   left: 0;
 }
