@@ -1,6 +1,6 @@
 /** @jsx h */
-/** @jsxFrag Fragment */
-import { h, useEffect } from "../client_deps.ts";
+import { h } from "preact";
+import { useEffect} from "preact/hooks";
 import { audioContext, prepareSounds } from "../lib/sound.ts";
 import { useToggle } from "./useToggle.tsx";
 import { log } from "./Log.tsx";

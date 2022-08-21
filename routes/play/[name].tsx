@@ -1,15 +1,13 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 import Template from "../../components/Template.tsx";
-import {
-  h,
-  Head,
-} from "../../client_deps.ts";
+import { h } from "preact";
+import { Head } from "$fresh/runtime.ts";
 import Play from "../../islands/Play.tsx";
 
-export default function PlayContainer({url}: {url: URL}) {
-  const url2 = url || location
-  const pageName = decodeURI(url2.pathname.split('/').pop()!)
+export default function PlayContainer({ url }: { url: URL }) {
+  const url2 = url || location;
+  const pageName = decodeURI(url2.pathname.split("/").pop()!);
   return (
     <Template pageName={pageName}>
       <Head>

@@ -1,6 +1,6 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { h } from "../client_deps.ts";
+import { h } from "preact";
 
 export function log(msg: string) {
   console.log(msg);

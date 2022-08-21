@@ -1,5 +1,6 @@
 /** @jsx h */
-import { h, useState } from "../client_deps.ts";
+import { h } from "preact";
+import { useState } from "preact/hooks";
 
 export default function CreateRoom() {
   const name = useInput("");

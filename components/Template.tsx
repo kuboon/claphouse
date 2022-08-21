@@ -1,11 +1,13 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h, Head, ComponentChildren} from "../client_deps.ts";
+import { ComponentChildren, Fragment, h } from "preact";
+import { Head } from "$fresh/runtime.ts";
 
 export default function Template(
-  { pageName, children }: { pageName: string, children: ComponentChildren },
+  { pageName, children }: { pageName: string; children: ComponentChildren },
 ) {
-  const ogImage = `https://og.kbn.one/%F0%9F%91%8Fclaphouse%0A%0A${pageName}.png?theme=light&md=1&fontSize=200px`
+  const ogImage =
+    `https://og.kbn.one/%F0%9F%91%8Fclaphouse%0A%0A${pageName}.png?theme=light&md=1&fontSize=200px`;
   return (
     <>
       <Head>
@@ -17,7 +19,9 @@ export default function Template(
         <a href="/" target="_blank">👏Claphouse</a>
       </h1>
       {children}
-      <footer className="copyinfo">Built by <a href="https://twitter.com/kuboon">kuboon</a></footer>
+      <footer className="copyinfo">
+        Built by <a href="https://twitter.com/kuboon">kuboon</a>
+      </footer>
     </>
   );
 }

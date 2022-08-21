@@ -1,5 +1,6 @@
 import { QR } from "https://taisukef.github.io/qrcode-generator/es/QR.js";
-import { h, Fragment, useState } from "../client_deps.ts";
+import { h } from "preact";
+import { useState } from "preact/hooks";
 
 declare interface QR {
   encode: (str: string) => string;
@@ -20,6 +21,8 @@ export default function QRcode({ data }: { data: string }) {
 }
 function qrString(data: string) {
   const qr = QR.encode(data, "L");
-  return qr.map((x) => String.fromCharCode(...x.flatMap((y) => y ? [9608, 9608] : [32, 32])))
+  return qr.map((x) =>
+    String.fromCharCode(...x.flatMap((y) => y ? [9608, 9608] : [32, 32]))
+  )
     .join("\n");
 }

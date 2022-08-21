@@ -1,6 +1,7 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h, useCallback, useState } from "../client_deps.ts";
+import { Fragment, h } from "preact";
+import { useCallback, useState } from "preact/hooks";
 
 type ToggleProps = { onClick: (newVal: boolean) => void; children: string };
 export function useToggle(value = false) {

@@ -2,7 +2,7 @@
 /** @jsxFrag Fragment */
 import Template from "../components/Template.tsx";
 import CreateRoom from "../islands/CreateRoom.tsx";
-import { h } from "../client_deps.ts";
+import { h } from "preact";
 import Chat from "../components/Chat.tsx";
 
 export default function Home() {

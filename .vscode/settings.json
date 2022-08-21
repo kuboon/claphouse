@@ -1,10 +1,5 @@
 {
   "deno.enable": true,
-  "deno.unstable": true,
-  "deno.config": "./deno.json",
   "deno.lint": true,
-  "deno.path": "/home/vscode/.asdf/shims/deno",
-  "deno.suggest.imports.hosts": {
-    "https://deno.land": true
-  }
+  "editor.defaultFormatter": "denoland.vscode-deno"
 }

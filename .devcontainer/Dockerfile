@@ -10,9 +10,8 @@ RUN chsh -s /usr/bin/fish vscode
 USER vscode
 SHELL ["/usr/bin/fish", "-l", "-c"]
 RUN git config --global pull.ff only
-RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.1 \
+RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.2 \
  && mkdir -p ~/.config/fish/completions; and ln -s ~/.asdf/completions/asdf.fish ~/.config/fish/completions \
  && echo "source ~/.asdf/asdf.fish" >> $HOME/.config/fish/config.fish
 RUN asdf plugin add deno && asdf install deno latest && asdf global deno latest
-RUN deno install -A -f -n land https://deno.land/x/land@v0.7.0/cli.ts
 RUN asdf reshim
