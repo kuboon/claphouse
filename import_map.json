@@ -1,9 +1,5 @@
 {
   "imports": {
-    "https://crux.land/router@0.0.11": "./router.ts",
-    "https://crux.land/api/get/router@0.0.11": "./router.ts",
-    "https://crux.land/api/get/uYQG.ts": "./router.ts",
-    "https://crux.land/api/get/uYQG": "./router.ts",
     "$fresh/": "https://deno.land/x/fresh@1.0.2/",
     "preact": "https://esm.sh/preact@10.10.0",
     "preact/": "https://esm.sh/preact@10.10.0/",
