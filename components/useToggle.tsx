@@ -1,6 +1,3 @@
-/** @jsx h */
-/** @jsxFrag Fragment */
-import { Fragment, h } from "preact";
 import { useCallback, useState } from "preact/hooks";
 
 type ToggleProps = { onClick: (newVal: boolean) => void; children: string };

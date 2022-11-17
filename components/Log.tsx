@@ -1,7 +1,3 @@
-/** @jsx h */
-/** @jsxFrag Fragment */
-import { h } from "preact";
-
 export function log(msg: string) {
   console.log(msg);
   const elm = document.getElementById("log")!;

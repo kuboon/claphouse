@@ -1,5 +1,3 @@
-/** @jsx h */
-/** @jsxFrag Fragment */
 import { SoundToggle } from "../components/SoundToggle.tsx";
 import {
   PlayButtons,
@@ -7,7 +5,6 @@ import {
   wsConnect,
 } from "../components/WireToggle.tsx";
 import { Log, log } from "../components/Log.tsx";
-import { h } from "preact";
 import { useEffect } from "preact/hooks";
 import { IS_BROWSER } from "$fresh/runtime.ts";
 

@@ -1,6 +1,3 @@
-/** @jsx h */
-/** @jsxFrag Fragment */
-import { Fragment, h } from "preact";
 import { log } from "./Log.tsx";
 import { useToggle } from "./useToggle.tsx";
 import { list, play } from "../lib/sound.ts";

@@ -1,6 +1,4 @@
-/** @jsx h */
 import { QR } from "https://taisukef.github.io/qrcode-generator/es/QR.js";
-import { h } from "preact";
 import { useEffect, useRef, useState } from "preact/hooks";
 
 declare interface QR {

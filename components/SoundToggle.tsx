@@ -1,5 +1,3 @@
-/** @jsx h */
-import { h } from "preact";
 import { useEffect} from "preact/hooks";
 import { audioContext, prepareSounds } from "../lib/sound.ts";
 import { useToggle } from "./useToggle.tsx";

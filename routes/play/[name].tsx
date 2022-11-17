@@ -1,7 +1,4 @@
-/** @jsx h */
-/** @jsxFrag Fragment */
 import Template from "../../components/Template.tsx";
-import { h } from "preact";
 import { Head } from "$fresh/runtime.ts";
 import Play from "../../islands/Play.tsx";
 
