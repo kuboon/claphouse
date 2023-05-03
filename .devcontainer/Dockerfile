@@ -1,17 +1,16 @@
-# See here for image contents: https://github.com/microsoft/vscode-dev-containers/tree/v0.202.5/containers/ubuntu/.devcontainer/base.Dockerfile
+# [Choice] Debian OS version: bullseye, buster
+ARG VARIANT=bullseye
+FROM mcr.microsoft.com/devcontainers/base:0-${VARIANT}
 
-# [Choice] Ubuntu version (use hirsuite or bionic on local arm64/Apple Silicon): hirsute, focal, bionic
-ARG VARIANT="hirsute"
-FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT}
+ENV DENO_INSTALL=/deno
+# use unofficial deno installer for ARM
+RUN mkdir -p /deno \
+    && curl -s https://gist.githubusercontent.com/LukeChannings/09d53f5c364391042186518c8598b85e/raw/ac8cd8c675b985edd4b3e16df63ffef14d1f0e24/deno_install.sh | sh \
+    && chown -R vscode /deno
 
-RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
- && apt-get -y install --no-install-recommends fish
-RUN chsh -s /usr/bin/fish vscode
-USER vscode
-SHELL ["/usr/bin/fish", "-l", "-c"]
-RUN git config --global pull.ff only
-RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.2 \
- && mkdir -p ~/.config/fish/completions; and ln -s ~/.asdf/completions/asdf.fish ~/.config/fish/completions \
- && echo "source ~/.asdf/asdf.fish" >> $HOME/.config/fish/config.fish
-RUN asdf plugin add deno && asdf install deno latest && asdf global deno latest
-RUN asdf reshim
+ENV PATH=${DENO_INSTALL}/bin:~/.deno/bin:${PATH} \
+    DENO_DIR=${DENO_INSTALL}/.cache/deno
+
+# [Optional] Uncomment this section to install additional OS packages.
+# RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+#    && apt-get -y install --no-install-recommends <your-package-list-here>

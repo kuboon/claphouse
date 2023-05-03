@@ -1,4 +1,4 @@
-import { useEffect} from "preact/hooks";
+import { useEffect } from "preact/hooks";
 import { audioContext, prepareSounds } from "../lib/sound.ts";
 import { useToggle } from "./useToggle.tsx";
 import { log } from "./Log.tsx";
