@@ -15,10 +15,11 @@ function onClick(newVal: boolean) {
     ws.close();
   }
 }
+const listEntries = Object.entries(list);
 export function PlayButtons() {
   return (
     <div class="buttons">
-      {Object.entries(list).map(([tag, sound]) => (
+      {listEntries.map(([tag, sound]) => (
         <button
           onClick={() => {
             ws.send(tag);
