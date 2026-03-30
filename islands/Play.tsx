@@ -4,20 +4,21 @@ import {
   WireToggle,
   wsConnect,
 } from "../components/WireToggle.tsx";
-import { Log, log } from "../components/Log.tsx";
+import { Log } from "../components/Log.tsx";
 import { useEffect } from "preact/hooks";
-import { IS_BROWSER } from "$fresh/runtime.ts";
+import { IS_BROWSER } from "fresh/runtime";
 
 import QR from "../components/QR.tsx";
 
 export default function Play() {
+  useEffect(() => {
+    const uuid = location.hash.substring(1);
+    if (uuid === "") return;
+    const protocol = location.protocol === "https:" ? "wss:" : "ws:";
+    const wsUrl = `${protocol}//${location.host}/ws/${uuid}`;
+    wsConnect(wsUrl);
+  }, []);
   if (!IS_BROWSER) return <div id="play">loading</div>;
-  const uuid = location.hash.substring(1);
-  if (uuid === "") {
-    return <div id="play">Invalid URL</div>;
-  }
-  const wsUrl = `wss://${location.host}/ws/${uuid}`;
-  useEffect(() => wsConnect(wsUrl), []);
 
   return (
     <div id="play">

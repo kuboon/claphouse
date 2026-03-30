@@ -1,5 +1,4 @@
 import { QR } from "https://taisukef.github.io/qrcode-generator/es/QR.js";
-import { h } from "preact";
 import { useEffect, useRef, useState } from "preact/hooks";
 
 declare interface QR {
@@ -8,12 +7,17 @@ declare interface QR {
 
 export default function QRcode({ data }: { data: string }) {
   const [show, setShow] = useState(false);
-  const button = h("button", {
-    className: "btn",
-    onClick: () => setShow(!show),
-  }, "QR");
+  const button = (
+    <button
+      type="button"
+      className="btn"
+      onClick={() => setShow(!show)}
+    >
+      QR
+    </button>
+  );
   const qr = show ? <QrCanvas data={QR.encode(data, "L")} /> : null;
-  return h("label", {}, [button, qr]);
+  return <label>{button}{qr}</label>;
 }
 const QrCanvas = ({ data }: { data: number[][] }) => {
   const canvasEl = useRef(null);
@@ -33,5 +37,7 @@ const QrCanvas = ({ data }: { data: number[][] }) => {
       });
     });
   }, [data]);
-  return <canvas ref={canvasEl} class="qr" width={canvasSize} height={canvasSize} />;
+  return (
+    <canvas ref={canvasEl} class="qr" width={canvasSize} height={canvasSize} />
+  );
 };

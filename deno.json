@@ -1,18 +1,16 @@
 {
   "tasks": {
     "start": "deno run -A --watch=static/,routes/ dev.ts",
-    "update": "deno run -A -r https://fresh.deno.dev/update .",
+    "update": "deno run -A -r jsr:@fresh/update .",
     "build": "deno run -A dev.ts build",
-    "preview": "deno run -A main.ts"
+    "preview": "deno serve -A _fresh/server.js"
   },
   "compilerOptions": { "jsx": "react-jsx", "jsxImportSource": "preact" },
   "imports": {
-    "$fresh/": "https://deno.land/x/fresh@1.6.8/",
-    "preact": "https://esm.sh/preact@10.19.6",
-    "preact/": "https://esm.sh/preact@10.19.6/",
-    "preact-render-to-string": "https://esm.sh/*preact-render-to-string@5.2.6",
-    "@preact/signals": "https://esm.sh/*@preact/signals@1.2.2",
-    "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.5.1"
+    "#/": "./",
+    "preact": "npm:preact@^10.28.3",
+    "@preact/signals": "npm:@preact/signals@^2.7.1",
+    "fresh": "jsr:@fresh/core@^2.2.2"
   },
   "lint": { "rules": { "tags": ["fresh", "recommended"] } },
   "exclude": ["**/_fresh/*"]

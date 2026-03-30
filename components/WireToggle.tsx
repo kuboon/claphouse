@@ -1,8 +1,8 @@
 import { log } from "./Log.tsx";
 import { useToggle } from "./useToggle.tsx";
-import { list, play } from "../lib/sound.ts";
+import { list, play } from "#/lib/sound.ts";
 
-let setIsWire = (val: boolean) => {};
+let setIsWire = (_: boolean) => {};
 export function WireToggle() {
   const { Toggle, setIsOn } = useToggle(true);
   setIsWire = setIsOn;
@@ -20,6 +20,7 @@ export function PlayButtons() {
     <div class="buttons">
       {Object.entries(list).map(([tag, sound]) => (
         <button
+          type="button"
           onClick={() => {
             ws.send(tag);
             play(tag);
@@ -37,9 +38,9 @@ const wsHooks: Partial<WebSocket> = {
   onmessage: ({ data }) => play(data),
   onopen: () => log("connected"),
   onclose: () => {
-      log("disconnected");
-      setIsWire(false);
-  }
+    log("disconnected");
+    setIsWire(false);
+  },
 };
 export function wsConnect(url: string) {
   if (ws) {
@@ -50,6 +51,6 @@ export function wsConnect(url: string) {
     Object.assign(ws, wsHooks);
   } catch (e) {
     setIsWire(false);
-    log(e);
+    log(e as string);
   }
 }

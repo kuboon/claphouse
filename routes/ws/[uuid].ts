@@ -1,7 +1,8 @@
-import { Handlers } from "https://raw.githubusercontent.com/lucacasonato/fresh/main/server.ts";
+import { define } from "#/utils.ts";
 
-export const handler: Handlers = {
-  GET(req, ctx) {
+export const handler = define.handlers({
+  GET(ctx) {
+    const req = ctx.req;
     const { socket, response } = Deno.upgradeWebSocket(req);
     if (!socket) throw new Error("unreachable");
 
@@ -24,4 +25,4 @@ export const handler: Handlers = {
     };
     return response;
   },
-};
+});

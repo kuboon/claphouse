@@ -1,5 +1,5 @@
 import { ComponentChildren } from "preact";
-import { Head } from "$fresh/runtime.ts";
+import { Head } from "fresh/runtime";
 
 export default function Template(
   { pageName, children }: { pageName: string; children: ComponentChildren },

@@ -4,7 +4,7 @@ export default function CreateRoom() {
   const name = useInput("");
   const uuid = crypto.randomUUID();
 
-  const href = `/play/${name.value || " "}#${uuid}`
+  const href = `/play/${name.value || " "}#${uuid}`;
   return (
     <form>
       <label>
@@ -25,7 +25,9 @@ const useInput = (initialValue: string) => {
   const [value, set] = useState(initialValue);
   return {
     value,
-    onChange: (e: Event) => {console.log('onchange'); 
-    set((e.target! as HTMLInputElement).value)},
+    onChange: (e: Event) => {
+      console.log("onchange");
+      set((e.target! as HTMLInputElement).value);
+    },
   };
 };

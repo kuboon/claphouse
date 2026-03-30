@@ -1,5 +1,5 @@
-import Template from "../../components/Template.tsx";
-import Play from "../../islands/Play.tsx";
+import Template from "#/components/Template.tsx";
+import Play from "#/islands/Play.tsx";
 // import { Head } from "$fresh/runtime.ts";
 
 export default function PlayContainer({ url }: { url: URL }) {
