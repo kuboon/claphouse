@@ -8,10 +8,15 @@
   "compilerOptions": { "jsx": "react-jsx", "jsxImportSource": "preact" },
   "imports": {
     "#/": "./",
+    "@levischuck/tiny-qr": "jsr:@levischuck/tiny-qr@^0.0.9",
     "preact": "npm:preact@^10.28.3",
     "@preact/signals": "npm:@preact/signals@^2.7.1",
     "fresh": "jsr:@fresh/core@^2.2.2"
   },
   "lint": { "rules": { "tags": ["fresh", "recommended"] } },
-  "exclude": ["**/_fresh/*"]
+  "exclude": ["**/_fresh/*"],
+  "deploy": {
+    "org": "kuboon-tokyo",
+    "app": "claphouse"
+  }
 }

@@ -5,6 +5,7 @@
     "jsr:@deno/loader@~0.3.10": "0.3.14",
     "jsr:@fresh/build-id@1": "1.0.1",
     "jsr:@fresh/core@^2.2.2": "2.2.2",
+    "jsr:@levischuck/tiny-qr@^0.0.9": "0.0.9",
     "jsr:@std/bytes@^1.0.6": "1.0.6",
     "jsr:@std/encoding@^1.0.10": "1.0.10",
     "jsr:@std/fmt@^1.0.8": "1.0.9",
@@ -71,6 +72,9 @@
         "npm:preact@^10.28.2",
         "npm:preact@^10.28.3"
       ]
+    },
+    "@levischuck/tiny-qr@0.0.9": {
+      "integrity": "d6ab20a6a7ef0780c2db450520ebcb65511803e2a9ac1e559aade714c717b212"
     },
     "@std/bytes@1.0.6": {
       "integrity": "f6ac6adbd8ccd99314045f5703e23af0a68d7f7e58364b47d2c7f408aeb5820a"
@@ -318,15 +322,10 @@
       "integrity": "sha512-wSAGyk2bYR1c7t3SZ3jHcM6xy0lcBcDel6lODcs9ME6Th++Dx2KU+6D3HD8wMMKGA8Wpw7OMd3/4RGzYRpzwRg=="
     }
   },
-  "remote": {
-    "https://taisukef.github.io/qrcode-generator/es/QR.js": "54f8b578fcded93e16baf3938e76e2153cce456039c8672f989924d8c7976f80",
-    "https://taisukef.github.io/qrcode-generator/es/QRMode.js": "403bbc51294a2bca0c27fa6456562ee7e92f89240f841d280d5e52e91ef777d9",
-    "https://taisukef.github.io/qrcode-generator/es/qrcode.js": "01c8eebc758eff0279159acd36188d922cbfd84bf76536ec3861994d9250317b",
-    "https://taisukef.github.io/qrcode-generator/es/qrcodec.js": "71c134ade9ce0c5f68e29b4a1f5f19a12ea61a0b9c8c3c59ebef8324a780ae5d"
-  },
   "workspace": {
     "dependencies": [
       "jsr:@fresh/core@^2.2.2",
+      "jsr:@levischuck/tiny-qr@^0.0.9",
       "npm:@preact/signals@^2.7.1",
       "npm:preact@^10.28.3"
     ]

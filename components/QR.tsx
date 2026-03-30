@@ -1,9 +1,6 @@
-import { QR } from "https://taisukef.github.io/qrcode-generator/es/QR.js";
-import { useEffect, useRef, useState } from "preact/hooks";
+import { EcLevel, qrCode } from "@levischuck/tiny-qr";
 
-declare interface QR {
-  encode: (str: string) => string;
-}
+import { useEffect, useRef, useState } from "preact/hooks";
 
 export default function QRcode({ data }: { data: string }) {
   const [show, setShow] = useState(false);
@@ -16,10 +13,12 @@ export default function QRcode({ data }: { data: string }) {
       QR
     </button>
   );
-  const qr = show ? <QrCanvas data={QR.encode(data, "L")} /> : null;
+  const qr = show
+    ? <QrCanvas data={qrCode({ data, ec: EcLevel.L }).matrix} />
+    : null;
   return <label>{button}{qr}</label>;
 }
-const QrCanvas = ({ data }: { data: number[][] }) => {
+const QrCanvas = ({ data }: { data: boolean[][] }) => {
   const canvasEl = useRef(null);
   const Scale = 5;
   const canvasSize = (data.length + 8) * Scale;
